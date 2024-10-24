@@ -1,3 +1,4 @@
+use crate::graphics::draw_roads;
 pub use crate::intersection::Intersection;
 pub use crate::vehicle::Vehicle;
 pub use piston_window::Key;
@@ -29,6 +30,9 @@ impl Simulation {
     }
 
     pub fn draw(&self, canvas: &mut Canvas<sdl2::video::Window>) {
+        // Dessiner les routes
+        draw_roads(canvas);
+
         // Dessiner les véhicules
         for vehicle in &self.intersection.vehicles {
             crate::graphics::draw_vehicle(canvas, vehicle);
