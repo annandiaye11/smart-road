@@ -33,10 +33,10 @@ impl Simulation {
         // Dessiner les routes
         draw_roads(canvas);
 
-        // Dessiner les véhicules
-        for vehicle in &self.intersection.vehicles {
-            crate::graphics::draw_vehicle(canvas, vehicle);
-        }
+        // // Dessiner les véhicules
+        // for vehicle in &self.intersection.vehicles {
+        //     crate::graphics::draw_vehicle(canvas, vehicle);
+        // }
     }
     
 }

@@ -18,7 +18,7 @@ fn main() {
     let video_subsystem = sdl_context.video().unwrap();
     
     let window = video_subsystem
-        .window("Intersection Simulation", 800, 600)
+        .window("Intersection Simulation", 1050, 850)
         .position_centered()
         .build()
         .unwrap();
