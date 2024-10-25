@@ -12,8 +12,10 @@ pub mod vehicle;
 pub mod intersection;
 pub mod simulation;
 pub mod graphics;
+mod statistics;
+mod text_renderer;
 
-fn main() {
+fn main() -> Result<(), String> {
     let sdl_context = sdl2::init().unwrap();
     let video_subsystem = sdl_context.video().unwrap();
     
@@ -26,17 +28,19 @@ fn main() {
     let mut canvas = window.into_canvas().build().unwrap();
     let mut event_pump = sdl_context.event_pump().unwrap();
     
-    let mut sim = simulation::Simulation::new();
+    let mut sim = simulation::Simulation::new()?;
     let mut last_frame = Instant::now();
 
-    loop {
+    'running: loop {
         let delta_time = last_frame.elapsed();
         last_frame = Instant::now();
 
         for event in event_pump.poll_iter() {
             match event {
-                Event::Quit { .. } => return,
-                Event::KeyDown { keycode: Some(Keycode::Escape), .. } => return,
+                Event::Quit { .. } => { 
+                    break 'running;
+                },
+                Event::KeyDown { keycode: Some(Keycode::Escape), .. } => {sim.show_stats = true;},
                 Event::KeyDown { keycode: Some(Keycode::Up), .. } => {
                     sim.handle_keypress(Keycode::Up);
                 }
@@ -59,4 +63,5 @@ fn main() {
             std::thread::sleep(frame_duration - delta_time);
         }
     }
+    Ok(()) 
 }

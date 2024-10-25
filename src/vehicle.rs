@@ -2,14 +2,16 @@ pub struct Vehicle {
     pub position: [f64; 2],
     pub velocity: f64,
     pub angle: f64,
+    pub stats_id: usize, 
 }
 
 impl Vehicle {
-    pub fn new(position: [f64; 2], velocity: f64) -> Self {
+    pub fn new(position: [f64; 2], velocity: f64, stats_id: usize) -> Self {
         Self {
             position,
             velocity,
             angle: 0.0,
+            stats_id,
         }
     }
 
